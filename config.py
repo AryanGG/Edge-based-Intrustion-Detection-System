@@ -45,3 +45,25 @@ SNAPSHOT_COOLDOWN_SECONDS: float = 3.0  # Min seconds between consecutive snapsh
 WINDOW_TITLE: str = "Edge IDS — Live Feed"
 FRAME_WIDTH: int = 640
 FRAME_HEIGHT: int = 480
+
+# ── Face Recognition Whitelist ────────────────────────────────────────────────
+# When enabled, persons inside the ROI are checked against known_faces/ before
+# triggering an alert.  Matching persons are displayed with their name and a
+# teal bounding box — no alert fires.  Unrecognised or ambiguous faces still
+# trigger the full alert pipeline.
+#
+# Set FACE_RECOGNITION_ENABLED = False to skip face ID entirely (faster).
+FACE_RECOGNITION_ENABLED: bool = True
+
+# Folder containing reference photos of known/whitelisted people.
+# See README §"Registering Known People" for the expected layout.
+KNOWN_FACES_DIR: str = "known_faces"
+
+# Matching strictness: lower value = stricter match required.
+# 0.6 is the library default; 0.5 gives fewer false positives.
+FACE_MATCH_TOLERANCE: float = 0.6
+
+# Face detection model used inside the whitelist check.
+# "hog"  — CPU-friendly, works on all hardware  (recommended)
+# "cnn"  — more accurate, requires a CUDA-capable GPU
+FACE_DETECTION_MODEL: str = "hog"
